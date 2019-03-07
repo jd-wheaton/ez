@@ -1,0 +1,42 @@
+Sub main
+
+        :AutoAttack
+                /if (${SpawnCount[npc radius 40]}) {
+                        /tar id ${NearestSpawn[npc radius 40].ID}
+
+                        /if (${Target.ID}) {
+                                /echo Attacking in progress...
+                                
+                                /attack on
+                                /delay 5
+                                /stick 10
+                                /delay 5
+
+                                :KillNPC
+
+                                        /if (${Target.Type.NotEqual[CORPSE]}) {
+                                               /delay 5 
+
+                                               /if (${Me.CombatAbilityReady[Cyclone Blade]})  {
+                                                       /disc Cyclone Blade
+                                               }
+                                               /bc Assist me with >>> ${Target.CleanName}  <<<
+                                               /bct melee //attack on
+                                               /delay 5
+                                               /bca //tar id ${Target.ID}
+                                               /bct melee //stick 10 uw behind 
+                                               /bct Servilius //face
+                                               /bct Servilius //pet attack
+
+                                               /if (${Me.CombatAbilityReady[Commanding Voice]}) {
+                                                       /disc Commanding Voice
+                                               }
+                                                
+                                                /goto :KillNPC
+                                        }
+
+                        }
+                }
+                /goto :AutoAttack
+
+/return
